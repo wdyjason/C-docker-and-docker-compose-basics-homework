@@ -1,0 +1,24 @@
+version: "3"
+
+networks:
+  backend-net:
+    driver: bridge
+
+services:
+    alice:
+      build: ./alice
+      container_name: alice
+      networks:
+        - backend-net
+      ports:
+        - "8080:8080"
+      depends_on:
+        - bob
+
+    bob:
+      build: ./bob
+      container_name: bob
+      networks:
+        - backend-net
+      ports:
+        - "8081:8081"
